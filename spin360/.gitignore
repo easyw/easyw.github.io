@@ -10,9 +10,9 @@
 *.jar
 *.rar
 *.tar
-*.zip
+# *.zip
 
 #############
 # Images    #
 #############
-*.[jJ][pP][gG]
+# *.[jJ][pP][gG]
