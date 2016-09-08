@@ -132,7 +132,7 @@
     for (var id in instances) {
       if (instances.hasOwnProperty(id)) {
         var data = instances[id];
-        if ((data.responsive) { //&&(!isinFullscreen)) {  //maui
+        if ((data.responsive)) { //&&(!isinFullscreen)) {  //maui
           Spin.boot(data);
         }
       }
