@@ -49,10 +49,10 @@
     <div style="padding-top: 5rem; padding-bottom: 5rem;" class="container">
       <!--div class="sample-view"-->
         <i id='spritespin1' class='fa fa-refresh fa-2x' style='color:DeepSkyBlue;'></i>&nbsp;&nbsp;
-        <i id='spritespin1' class='fa fa-desktop fa-2x' style='color:DeepSkyBlue; cursor: pointer;'></i><!-- class='fa fa-arrows-alt fa-2x'></i-->
+        <i id='spritespin1F' class='fa fa-desktop fa-2x' style='color:DeepSkyBlue; cursor: pointer;'></i><!-- class='fa fa-arrows-alt fa-2x'></i-->
         <div class="spritespin1" style='background-image: url("ajax-loader.gif");background-position: 50% 20%;background-repeat: no-repeat;position:relative;'></div>
         <i id='spritespin2' class='fa fa-refresh fa-2x' style='color:DeepSkyBlue;'></i>&nbsp;&nbsp;
-        <i id='spritespin2' class='fa fa-desktop fa-2x' style='color:DeepSkyBlue; cursor: pointer;'></i><!-- class='fa fa-arrows-alt fa-2x'></i-->
+        <i id='spritespin2F' class='fa fa-desktop fa-2x' style='color:DeepSkyBlue; cursor: pointer;'></i><!-- class='fa fa-arrows-alt fa-2x'></i-->
         <div class="spritespin2" style='background-image: url("ajax-loader.gif");background-position: 50% 20%;background-repeat: no-repeat;position:relative;'></div>
       <!--/div-->
         <script type="text/javascript">
@@ -60,7 +60,8 @@
               $('.spritespin1').spritespin('api').data.reverse=!$('.spritespin1').spritespin('api').data.reverse;$('.spritespin1').spritespin('api').startAnimation(); });
           $('#spritespin2').click(function(e){ 
               $('.spritespin2').spritespin('api').data.reverse=!$('.spritespin2').spritespin('api').data.reverse;$('.spritespin2').spritespin('api').startAnimation(); });
-           
+          $('#spritespin1F').click(function(e){ e.preventDefault();$('.spritespin1').spritespin('api').requestFullscreen(); });
+          $('#spritespin2F').click(function(e){ e.preventDefault();$('.spritespin2').spritespin('api').requestFullscreen(); });
           $(function(){
             $('.spritespin1').spritespin({
               //source: './images/bike6x6_big.jpg',
