@@ -1,4 +1,5 @@
-
+var isinFullscreen=false; //maui
+  
 (function($) {
   "use strict";
 
@@ -106,7 +107,6 @@
 
   var idCounter = 0;
   var instances = {};
-  var isinFullscreen=false; //maui
   Spin.instances = instances;
 
   function simulateEvent(name, e) {
@@ -132,7 +132,7 @@
     for (var id in instances) {
       if (instances.hasOwnProperty(id)) {
         var data = instances[id];
-        if ((data.responsive)) { //&&(!isinFullscreen)) {  //maui
+        if ((data.responsive)&&(!isinFullscreen)) {  //maui
           Spin.boot(data);
         }
       }
@@ -1189,8 +1189,8 @@
           data.height = window.screen.height;
           data.source = opts.source || oSource;
           data.sizeMode = opts.sizeMode || 'fit';
-          //if (isinFullscreen) 
-          SpriteSpin.boot(data); //maui
+          if (isinFullscreen) 
+            SpriteSpin.boot(data); //maui
         } else {
           // EXIT
           unbindChangeEvent();
