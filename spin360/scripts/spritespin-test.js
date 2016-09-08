@@ -1188,9 +1188,10 @@ var isinFullscreen=false; //maui
           data.width = window.screen.width;
           data.height = window.screen.height;
           data.source = opts.source || oSource;
-          data.sizeMode = opts.sizeMode || 'fit';
-          if (isinFullscreen) 
+          if (isinFullscreen) {
+            data.sizeMode = opts.sizeMode || 'fit';
             SpriteSpin.boot(data); //maui
+            }
         } else {
           // EXIT
           unbindChangeEvent();
