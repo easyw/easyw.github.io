@@ -1,5 +1,6 @@
 var isinFullscreen=false; //maui
-  
+var version= "3.4.1.1"; //maui chrome webkit fullscreen compatible
+
 (function($) {
   "use strict";
 
