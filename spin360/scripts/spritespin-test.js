@@ -132,6 +132,7 @@ var isinFullscreen=false; //maui
     for (var id in instances) {
       if (instances.hasOwnProperty(id)) {
         var data = instances[id];
+        //console.log(isinFullscreen);
         if ((data.responsive)&&(!isinFullscreen)) {  //maui
           Spin.boot(data);
         }
@@ -675,7 +676,7 @@ var isinFullscreen=false; //maui
     var w = Math.floor(data.width || data.frameWidth || data.target.innerWidth());
     var h = Math.floor(data.height || data.frameHeight || data.target.innerHeight());
     
-    if (data.responsive && (typeof window.getComputedStyle === 'function')) {
+    if (data.responsive && (typeof window.getComputedStyle === 'function') && (!isinFullscreen)) { //maui
       var style = getComputedStyle(data.target[0]);
       if (style.width) {
         var a = w / h;
@@ -1188,12 +1189,14 @@ var isinFullscreen=false; //maui
           data.width = window.screen.width;
           data.height = window.screen.height;
           data.source = opts.source || oSource;
-          if (isinFullscreen) {
+          // if (!isinFullscreen) {
             data.sizeMode = opts.sizeMode || 'fit';
             SpriteSpin.boot(data); //maui
-            }
+          //  }
         } else {
           // EXIT
+          isinFullscreen=false; //maui
+          //console.log(isinFullscreen);        
           unbindChangeEvent();
           data.width = oWidth;
           data.height = oHeight;
