@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Spin360 Wordpress Plugin Demo with SpriteSpin</title>
+    <link type="text/css" rel="stylesheet" media="all" href="style.css">
+    <link type="text/css" rel="stylesheet" media="all" href="css/font-awesome.min.css">
+    <script src="scripts/page.js" type="text/javascript"></script>
+    <!-- script src="http://code.jquery.com/jquery-1.11.1.js" type="text/javascript"></script -->
+    <script src="scripts/spritespin.min.js" type="text/javascript"></script>
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="SpriteSpin example">
+    <meta property="og:site_name" content="SpriteSpin">
+    <meta property="og:description" content="A SpriteSpin example.">
+  </head>
+  <body>
+  <br>
+  <center>
+  <h1>Hello from spin360 wordpress plugin</h1>
+  </center>
+  <br>
+   <table style="width:100%;">
+  <tr>
+    <th style="width:15%;">&nbsp;</th>
+    <th style="width:70%;"><h3><a href="https://wordpress.org/plugins/spin360/">downloading link spin360.zip</a></h3></th>
+    <th style="width:15%;">&nbsp;</th>
+  </tr>
+  <tr>
+    <td style="width:15%;">&nbsp;</td>
+    <td style="width:70%;"><h4><a href="spin360demo.zip">downloading sample project spin360demo.zip</a></h4></td>
+    <td style="width:35%;">&nbsp;</td>
+  </tr>
+  <tr>
+    <td style="width:15%;">&nbsp;</td>
+    <td style="width:70%; font-family: monospace;">[spin360 canvas_name="s1" imgs_folder="spin360demo/" imgs_nbr=200]</td>
+    <td style="width:35%;">&nbsp;</td>
+  </tr>
+  <tr>
+    <th style="width:15%;">&nbsp;</th>
+    <th style="width:70%;"><h4><a href="https://github.com/easyw/spin360">spin360 source code</a></h4></th>
+    <th style="width:35%;">&nbsp;</th>
+  </tr>
+  <tr>
+    <td style="width:15%;">&nbsp;</td>
+    <td style="width:70%; "><h4 style="color: FireBrick "><b>Note: </b>more features are available when the plugin is installed on a WordPress site</h4></td>
+    <td style="width:35%; ">&nbsp;</td>
+  </tr>
+</table> 
+
+    <div style="padding-top: 5rem; padding-bottom: 5rem;" class="container">
+      <!--div class="sample-view"-->
+        <i id='spritespin1' class='fa fa-refresh fa-2x' style='color:DeepSkyBlue;'></i>&nbsp;&nbsp;
+        <i id='spritespin1F' class='fa fa-desktop fa-2x' style='color:DeepSkyBlue; cursor: pointer;'></i><!-- class='fa fa-arrows-alt fa-2x'></i-->
+        <div class="spritespin1" style='background-image: url("ajax-loader.gif");background-position: 50% 20%;background-repeat: no-repeat;position:relative;'></div>
+        <i id='spritespin2' class='fa fa-refresh fa-2x' style='color:DeepSkyBlue;'></i>&nbsp;&nbsp;
+        <i id='spritespin2F' class='fa fa-desktop fa-2x' style='color:DeepSkyBlue; cursor: pointer;'></i><!-- class='fa fa-arrows-alt fa-2x'></i-->
+        <div class="spritespin2" style='background-image: url("ajax-loader.gif");background-position: 50% 20%;background-repeat: no-repeat;position:relative;'></div>
+      <!--/div-->
+        <script type="text/javascript">
+          $('#spritespin1').click(function(e){ 
+              $('.spritespin1').spritespin('api').data.reverse=!$('.spritespin1').spritespin('api').data.reverse;$('.spritespin1').spritespin('api').startAnimation(); });
+          $('#spritespin2').click(function(e){ 
+              $('.spritespin2').spritespin('api').data.reverse=!$('.spritespin2').spritespin('api').data.reverse;$('.spritespin2').spritespin('api').startAnimation(); });
+          $('#spritespin1F').click(function(e){ e.preventDefault();$('.spritespin1').spritespin('api').requestFullscreen(); });
+          $('#spritespin2F').click(function(e){ e.preventDefault();$('.spritespin2').spritespin('api').requestFullscreen(); });
+          $(function(){
+            $('.spritespin1').spritespin({
+              //source: './images/bike6x6_big.jpg',
+              //frames: 34,
+              //framesX: 6,
+              width: 480,
+              height: 327,
+              source: SpriteSpin.sourceArray('spin360demo1/{frame}.jpg', { frame: [1,34], digits: 4 }),
+              sense: -1,
+              responsive: false
+            });
+          });
+          $(function(){
+            $('.spritespin2').spritespin({
+              width: 400,
+              height: 327,
+              source: SpriteSpin.sourceArray('spin360demo1/{frame}.jpg', { frame: [1,34], digits: 4 }),
+              sense: -1,
+              responsive: true
+            });
+          });
+        </script>
+      </div>
+  </body>
+
+</html>
