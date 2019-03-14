@@ -7,13 +7,13 @@
         <style>
             body {
                 font-family: Monospace;
-                background-color: #000;
+                background-color: #fff;
                 color: #fff;
                 margin: 0px;
                 overflow: hidden;
             }
             #info {
-                color: #fff;
+                color: #00f;
                 position: absolute;
                 top: 10px;
                 width: 100%;
@@ -157,6 +157,7 @@
                 controls = new THREE.OrbitControls( camera );
 
                 scene = new THREE.Scene();
+                scene.background = new THREE.Color( 0xF5F5F5 );
                 scene.add( camera );
 
                 // light
