@@ -75,8 +75,8 @@
             function zoom_refit (offset) {
                 offset =  offset || 1.15;
                 r=cameraZ*offset;
-                camera.position.x=r*Math.cos(2);
-                camera.position.z=r*Math.sin(2);
+                camera.position.x= -1.2; //0.0; //r*Math.cos(.1);
+                camera.position.z=-7.9; //-8.0; //r*Math.sin(2);
                 camera.lookAt(scene.position);
                 renderer.render( scene, camera );
             }
@@ -101,41 +101,42 @@
             
                 cameraZ *= offset; // zoom out a little so that objects don't fill the screen
             
-                // <--- NEW CODE
-                //Method 1 to get object's world position
-                scene.updateMatrixWorld(); //Update world positions
-                var objectWorldPosition = new THREE.Vector3();
-                objectWorldPosition.setFromMatrixPosition( object.matrixWorld );
+                zoom_refit (1.15);
+                if (0) {
+                    // <--- NEW CODE
+                    //Method 1 to get object's world position
+                    scene.updateMatrixWorld(); //Update world positions
+                    var objectWorldPosition = new THREE.Vector3();
+                    objectWorldPosition.setFromMatrixPosition( object.matrixWorld );
+                    
+                    //Method 2 to get object's world position
+                    //objectWorldPosition = object.getWorldPosition();
                 
-                //Method 2 to get object's world position
-                //objectWorldPosition = object.getWorldPosition();
-            
-                const directionVector = camera.position.sub(objectWorldPosition);   //Get vector from camera to object
-                const unitDirectionVector = directionVector.normalize(); // Convert to unit vector
-                camera.position = unitDirectionVector.multiplyScalar(cameraZ); //Multiply unit vector times cameraZ distance
-                camera.lookAt(objectWorldPosition); //Look at object
-                // --->
-            
-                const minZ = boundingBox.min.z;
-                const cameraToFarEdge = ( minZ < 0 ) ? -minZ + cameraZ : cameraZ - minZ;
-            
-                camera.far = cameraToFarEdge * 3;
-                camera.updateProjectionMatrix();
-            
-                if ( controls ) {
-            
-                // set camera to rotate around center of loaded object
-                controls.target = center;
-            
-                // prevent camera from zooming out far enough to create far plane cutoff
-                controls.maxDistance = cameraToFarEdge * 2;
-                        // ERROR HERE   
-                controls.saveState();
-            
-                } else {
-            
-                    camera.lookAt( center )
-            
+                    const directionVector = camera.position.sub(objectWorldPosition);   //Get vector from camera to object
+                    const unitDirectionVector = directionVector.normalize(); // Convert to unit vector
+                    camera.position = unitDirectionVector.multiplyScalar(cameraZ); //Multiply unit vector times cameraZ distance
+                    camera.lookAt(objectWorldPosition); //Look at object
+                    // --->
+                
+                    const minZ = boundingBox.min.z;
+                    const cameraToFarEdge = ( minZ < 0 ) ? -minZ + cameraZ : cameraZ - minZ;
+                
+                    camera.far = cameraToFarEdge * 3;
+                    camera.updateProjectionMatrix();
+                
+                    if ( controls ) {
+                
+                    // set camera to rotate around center of loaded object
+                    controls.target = center;
+                
+                    // prevent camera from zooming out far enough to create far plane cutoff
+                    controls.maxDistance = cameraToFarEdge * 2;
+                            // ERROR HERE   
+                    controls.saveState();
+                
+                    } else {
+                        camera.lookAt( center )
+                    }
                 }
             }
             
@@ -168,6 +169,9 @@
                 camera.add( dirLight );
                 camera.add( dirLight.target );
 
+                // var light = new THREE.AmbientLight( 0x404040 ); // soft white light
+                var light = new THREE.AmbientLight( 0x808080 ); // soft white light
+                scene.add( light );
                 // model
 
 				var onProgress = function ( xhr ) {
@@ -255,6 +259,9 @@
                     camera.position.x=r*Math.cos(timer);
                     camera.position.z=r*Math.sin(timer);
                     camera.lookAt(scene.position);
+                    console.log( timer + '% t' );
+                    console.log( camera.position.x + '% x' );
+                    console.log( camera.position.z + '% z' );
                     }
                 renderer.render( scene, camera );
 
