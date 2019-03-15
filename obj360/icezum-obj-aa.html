@@ -7,12 +7,13 @@
         <style>
             body {
                 font-family: Monospace;
-                background-color: #fff;
+                background-color: #F5F5F5;
                 color: #fff;
                 margin: 0px;
                 overflow: hidden;
             }
             #info {
+                background-color: #F5F5F5;
                 color: #00f;
                 position: absolute;
                 top: 10px;
@@ -28,9 +29,18 @@
                 cursor: pointer
             }
         </style>
+        <style>
+            #spinner {
+                width: 100%;
+                padding: 100px 0;
+                text-align: center;
+                background-color: #F5F5F5;
+                margin-top: 20px;
+            }
+        </style>
     </head>
 
-    <body>
+    <body bgcolor="#F5F5F5">
         <div id="info">
         <a href="http://threejs.org" target="_blank" rel="noopener">three.js</a> -
         kicad vrml format loader -
@@ -45,7 +55,12 @@
         <!-- button type="button" id="fitb" onclick="fitCameraToObject ( camera, object, 1.25, controls );return false;">zoom fit</button -->
         <!--model from <a href="http://cs.iupui.edu/~aharris/webDesign/vrml/" target="_blank" rel="noopener">VRML 2.0 Tutorial</a>,-->
         </div>
-
+        <div id="spinner">
+        <!-- br><br><br><br><br><br><br -->
+        <center>
+        <img src="assets/ajax-loader-spin.gif" alt="" />
+        </center>
+        </div>
         <script src="js/three.js"></script>
 
         <script src="js/OrbitControls.js"></script>
@@ -62,11 +77,24 @@
         <script>
 
             var rotate = false; var cameraZ;
+            var divId;
             
             if ( WEBGL.isWebGLAvailable() === false ) {
 
                 document.body.appendChild( WEBGL.getWebGLErrorMessage() );
 
+            }
+            function showhide(divId) {
+                var x = document.getElementById(divId);
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
+            function hide(divId) {
+                var x = document.getElementById(divId);
+                x.style.display = "none";
             }
             function toggle_rotation () {
                 rotate = ! rotate;
@@ -203,9 +231,10 @@
 								// object.position.y = - 05;
 								scene.add( object );
                                 fitCameraToObject ( camera, object, 1.15, controls );
+                                //showhide("spinner");
+                                hide("spinner");
 
 							}, onProgress, onError );
-
 					} );
 
 				//
@@ -237,7 +266,7 @@
                 //
 
                 window.addEventListener( 'resize', onWindowResize, false );
-                
+                //showhide("spinner");
             }
 
             function onWindowResize() {
@@ -264,9 +293,7 @@
                     console.log( camera.position.z + '% z' );
                     }
                 renderer.render( scene, camera );
-
                 // stats.update();
-
             }
 
         </script>
