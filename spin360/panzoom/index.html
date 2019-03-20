@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+        <title>360 view with zoom</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <script src='js/jquery.js'></script>
+        <script src='js/spritespin.js'></script>
+         <script src="js/panzoom.js"></script>
+        <script src='js/main.js'></script>
+        <link href = "styles/bootstrap.css" rel= "stylesheet">
+        <link href="styles/main.css" rel="stylesheet">
+    </head>
+    <body>
+      <h1>read README file its working fine all you need to do is copy them and add images</h1>
+        <a href="#" class="fullscreen btn btn-outline-primary">Fullscreen</a>
+        <!-- <a href="#"  class="zoom btn btn-outline-info">Zoom</a> -->
+        <a href="#"  class="zoom-in btn btn-outline-info">Zoom In</a>
+        <a href="#"  class="zoom-out btn btn-outline-info">Zoom Out</a>
+        <div class="zoom-range"></div>
+
+        <a href="#"  class="reset btn btn-outline-info">Reset Zoom</a>
+
+        <a href="#" class="animate btn btn-outline-warning">Animate</a>
+        <span class= "showOnAnimation">
+            <a href="#" class="rotate btn btn-outline-warning">Rotation</a>
+            <div class= "form-inline float-right animation-speed">
+                <label for="rotSpeed" class="col-form-label">Animation speed: </label>
+                <div class="col-6">
+                    <input class="col-12 form-control" type="number" placeholder="Enter a number" value ="40" id="rotSpeed">
+                </div>
+            </div>
+        </span>
+        <div class = "inner-images">
+            <img src="images/Acce01.png" alt="Inner images" class="inner-car-images">
+        </div>
+        <div class='carContainer'></div>
+    </body>
+</html>

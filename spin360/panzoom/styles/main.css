@@ -1,0 +1,50 @@
+* {
+    padding:0;
+    margin:0;
+}
+body{
+    padding:50px;
+    background-color: #FFF
+}
+
+.carContainer {
+    margin: auto;
+    margin-top: 30px;
+    background-color: #868e96;
+    border: 1px solid #868e96;
+    border-radius: 4px;
+}
+.spritezoom-stage {
+    background-color: #FFF;
+}
+
+.inner-car-images {
+    position: absolute;
+    z-index: 10;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    width: 180px;
+    height: 120px;
+    transform: none;
+    -ms-transform: none;
+    -moz-transform: none;
+    -webkit-transform: none;
+    pointer-events: none;
+}
+.inner-images{
+    width:100%;
+}
+.animation-speed {
+    color: #007bff;
+}
+.showOnAnimation {
+    display: none;
+}
+
+.zoom-range {
+    display: none;
+}
