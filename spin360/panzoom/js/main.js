@@ -30,7 +30,7 @@ $( document ).ready(function() {
         frame: 3,
         frameTime: 40, //changing the number increases or decreases the speed of rotation
         scrollThreshold: 50, // Number of pixels the user must drag within a frame to enable page scroll (for touch devices)
-        orientation: 'horizontal', //vertical value will make animation on mouse up/dowm movenemt
+        //orientation: 'vertical', //'horizontal', //vertical value will make animation on mouse up/dowm movenemt
         loop: true // If true loops the animation, applicable only if animation property is true
     };
     document.addEventListener("fullscreenchange", onFullScreenChange, false);
