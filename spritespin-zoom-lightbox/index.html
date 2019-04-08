@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<!-- https://github.com/kylefox/jquery-modal#installation -->
+<head>
+  <title>SpriteSpin panzoom & lightbox demo</title>
+  <link type="text/css" rel="stylesheet" media="all" href="style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <script src="scripts/jquery.js" type="text/javascript"></script>
+  <script src="scripts/spritespin.js" type="text/javascript"></script>
+  <script src="scripts/panzoom.js" type="text/javascript"></script>
+  <!-- jQuery Modal -->
+  <script src="scripts/jquery.modal.js"></script>
+  <link rel="stylesheet" href="scripts/jquery.modal.css" />    
+</head>
+<body>
+<br>
+<center>
+<h1>Spritespin panzoom + lightbox test page</h1>
+<br>
+  
+<table style="width:400px">
+<tr>
+  <td>
+  <div class="container" id="container">
+    <i id='spritespin1' class='fas fa-sync-alt fa-2x' style='color:DeepSkyBlue; cursor: pointer;'></i>&nbsp;&nbsp;
+    <i id='spritespin1F' class='fas fa-expand fa-2x' style='color:DeepSkyBlue; cursor: pointer;'></i><!-- class='fa fa-arrows-alt fa-2x'></i-->
+    <i id='spritespin2F' class='far fa-window-restore fa-2x' style='color:DeepSkyBlue; cursor: pointer;'></i><!-- class='fa fa-arrows-alt fa-2x'></i-->
+    &nbsp;&nbsp;
+    <i id='zi' class='fas fa-search-plus fa-2x' style='color:DeepSkyBlue; cursor: pointer;'></i>
+    <i id='zo' class='fas fa-search-minus fa-2x' style='color:DeepSkyBlue; cursor: pointer;'></i>
+    <i id='zr' class='fas fa-compress-arrows-alt fa-2x' style='color:DeepSkyBlue; cursor: pointer;'></i>
+    <div class="spritespin1"  id="ss-canvas" style='background-image: url("ajax-loader.gif");background-position: 50% 50%;background-repeat: no-repeat;position:relative;'></div>
+    
+    <br><br><br>
+    <script type="text/javascript">
+    jQuery('.spritespin1').click(function(e){ 
+        console.log('click');
+        jQuery('.spritespin1').spritespin('api').stopAnimation(); 
+    });
+    jQuery('#spritespin1F').click(function(e){ 
+        e.preventDefault();
+        jQuery('.spritespin1').spritespin('api').requestFullscreen(); 
+    });
+    jQuery('#spritespin1').click(function(e){ 
+        jQuery('.spritespin1').spritespin('api').data.reverse=!jQuery('.spritespin1').spritespin('api').data.reverse;jQuery('.spritespin1').spritespin('api').startAnimation(); 
+    });
+    
+    jQuery('.spritespin1').dblclick(function(e){ 
+        console.log('doubleclick');
+        jQuery('.spritespin1').spritespin('api').data.reverse=!jQuery('.spritespin1').spritespin('api').data.reverse;jQuery('.spritespin1').spritespin('api').startAnimation(); 
+    });
+      
+      
+    jQuery('#spritespin2').click(function(e){ 
+        jQuery('.spritespin2').spritespin('api').data.reverse=!jQuery('.spritespin2').spritespin('api').data.reverse;jQuery('.spritespin2').spritespin('api').startAnimation(); 
+    });
+    w= 192; h= 108; ar = 192/108; // 1.333;
+    jQuery(function() {  //documentready
+        jQuery('.spritespin1').spritespin({
+            width: w,
+            height: h,
+            source: SpriteSpin.sourceArray('board/{frame}.jpg', { frame: [1,24], digits: 4 }),
+            sense: 1,
+            animate: false,
+            frameTime: 80,
+            // detectSubsampling: false,
+            responsive: true
+        });
+        //panzoom-init
+        jQuery(".spritespin-canvas").panzoom({
+            panOnlyWhenZoomed: true,
+            //disablePan: true,
+            duration: 200, // duration of the zoom to effect
+            easing: 'ease-in-out', // type of zoom animation
+            //contain: "invert",
+            minScale: 1,
+            increment: .4,
+            maxScale: 3,
+            linearZoom: true,
+            which: 1, // changing this values makes pan possible on right lcick of mouse value : 1(left),2(middle),3(right clcik)
+            // Pan only on the X or Y axes
+            disableXAxis: false,
+            disableYAxis: false,
+            //$set: $(".spritespin-canvas"),
+            $zoomIn: jQuery("#zi"),
+            $zoomOut: jQuery("#zo"),
+            $reset: jQuery("#zr"),
+            // _zoomRange: jQuery(".zoom-range"),
+            onStart: undefined,
+            onChange: function(){},
+            onZoom: undefined,
+            onPan: undefined,
+            onEnd: function(){},
+            onReset: function(){}
+        });
+        var panzoom1 = jQuery(".spritespin-canvas").panzoom("instance");
+        // ending panzoom2
+        
+        // lightbox
+        jQuery('#spritespin2F').click(function(event) {  
+            jQuery('#ss-canvas').modal();
+            var h = jQuery(window).height();   // returns height of browser viewport
+            var w = jQuery(window).width();   // returns width of browser viewport
+            // ar = 1.333;
+            if ( w/ar > h ) {
+                w = h * ar;
+                }
+            else {
+                h = w / ar;
+                }
+            jQuery(".modal").css('max-width',w);
+            jQuery(".modal").css('max-height',h);
+            jQuery(".modal").css('width',parseInt(w*0.7)+'px');
+            jQuery(".modal").css('height',parseInt(h*0.7)+'px');
+            jQuery(".modal").css('background','#000000');
+            console.log(w,h);
+            return false;
+        });
+        jQuery('#ss-canvas').on(jQuery.modal.BEFORE_CLOSE, function(event, modal) {
+            location.reload();
+            console.log('closing');
+        });
+        // end lightbox
+    }); // end document ready
+    </script>
+  </div>
+  </td>
+  </tr>
+</table> 
+</center>
+  
+</body>
+
+</html>
+
+
+
+
+
