@@ -112,16 +112,43 @@
             onReset: function(){}
         });
         var panzoom1 = jQuery(".spritespin-canvas").panzoom("instance");
+        // jQuery('#ss-canvas').on("panzoomzoom", function(e, p) {
+        jQuery('#zi').on("click", function(e) { // , p) {
+            console.log('onpanzoom');
+            var data = $(".spritespin1").spritespin("data");
+            data.canvasRatio = panzoom1.scale * window.devicePixelRatio;
+            SpriteSpin.applyLayout(data);
+            SpriteSpin.updateFrame(data);
+            data.stage.show();
+        });
+        jQuery('#zd').on("click", function(e) { // , p) {
+            console.log('onpanzoom');
+            var data = $(".spritespin1").spritespin("data");
+            data.canvasRatio = panzoom1.scale * window.devicePixelRatio;
+            SpriteSpin.applyLayout(data);
+            SpriteSpin.updateFrame(data);
+            data.stage.show();
+        });
+        jQuery('#zr').on("click", function(e) { // , p) {
+            console.log('onpanzoom');
+            var data = $(".spritespin1").spritespin("data");
+            data.canvasRatio = panzoom1.scale * window.devicePixelRatio;
+            SpriteSpin.applyLayout(data);
+            SpriteSpin.updateFrame(data);
+            data.stage.show();
+        });
+        
         // ending panzoom2
         
         // lightbox
         jQuery('#spritespin2F').click(function(event) {  
-            jQuery('#ss-canvas').modal();
             ssc = document.getElementsByClassName('spritespin-canvas')
             context = ssc[0].getContext('2d');
             var wsc = ssc[0].width;
             var hsc = ssc[0].height;
             console.log(pxRatio(context),wsc,hsc);
+            var hxc = jQuery('#ss-canvas').height();   // returns height of browser viewport
+            var wxc = jQuery('#ss-canvas').width();   // returns width of browser viewport
             var h = jQuery(window).height();   // returns height of browser viewport
             var w = jQuery(window).width();   // returns width of browser viewport
             // ar = 1.333;
@@ -131,12 +158,18 @@
             else {
                 h = w / ar;
                 }
+            var data = $(".spritespin1").spritespin("data");
+            data.canvasRatio = panzoom1.scale * window.devicePixelRatio * (w/wxc);
+            SpriteSpin.applyLayout(data);
+            SpriteSpin.updateFrame(data);
+            data.stage.show();
+            jQuery('#ss-canvas').modal();
             jQuery(".modal").css('max-width',w);
             jQuery(".modal").css('max-height',h);
             jQuery(".modal").css('width',parseInt(w*0.8)+'px');
             jQuery(".modal").css('height',parseInt(h*0.8)+'px');
             jQuery(".modal").css('background','#000000');
-            console.log(parseInt(w*0.8),parseInt(h*0.8));
+            console.log(parseInt(w*0.8),parseInt(h*0.8), parseInt(wxc*0.8),parseInt(hxc*0.8));
             return false;
         });
         jQuery('#ss-canvas').on(jQuery.modal.BEFORE_CLOSE, function(event, modal) {
