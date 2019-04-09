@@ -34,12 +34,28 @@
     
     <br><br><br>
     <script type="text/javascript">
+    function pxRatio(context) {
+        var devicePixelRatio = window.devicePixelRatio || 1;
+        var backingStoreRatio = context.webkitBackingStorePixelRatio ||
+            context.mozBackingStorePixelRatio ||
+            context.msBackingStorePixelRatio ||
+            context.oBackingStorePixelRatio ||
+            context.backingStorePixelRatio || 1;
+        return devicePixelRatio / backingStoreRatio;
+    }
+    
     jQuery('.spritespin1').click(function(e){ 
         console.log('click');
         jQuery('.spritespin1').spritespin('api').stopAnimation(); 
     });
     jQuery('#spritespin1F').click(function(e){ 
         e.preventDefault();
+        ssc = document.getElementsByClassName('spritespin-canvas')
+        context = ssc[0].getContext('2d');
+        var wsc = ssc[0].width;
+        var hsc = ssc[0].height;
+        console.log(pxRatio(context),wsc,hsc);
+        // alert(pxRatio(context));
         jQuery('.spritespin1').spritespin('api').requestFullscreen(); 
     });
     jQuery('#spritespin1').click(function(e){ 
@@ -55,7 +71,7 @@
     jQuery('#spritespin2').click(function(e){ 
         jQuery('.spritespin2').spritespin('api').data.reverse=!jQuery('.spritespin2').spritespin('api').data.reverse;jQuery('.spritespin2').spritespin('api').startAnimation(); 
     });
-    w= 192; h= 108; ar = 192/108; // 1.333;
+    w= 1920; h= 1080; ar = w/h; // 1.333;
     jQuery(function() {  //documentready
         jQuery('.spritespin1').spritespin({
             width: w,
@@ -65,6 +81,7 @@
             animate: false,
             frameTime: 80,
             // detectSubsampling: false,
+            // sizeMode: 'fit',
             responsive: true
         });
         //panzoom-init
@@ -100,6 +117,11 @@
         // lightbox
         jQuery('#spritespin2F').click(function(event) {  
             jQuery('#ss-canvas').modal();
+            ssc = document.getElementsByClassName('spritespin-canvas')
+            context = ssc[0].getContext('2d');
+            var wsc = ssc[0].width;
+            var hsc = ssc[0].height;
+            console.log(pxRatio(context),wsc,hsc);
             var h = jQuery(window).height();   // returns height of browser viewport
             var w = jQuery(window).width();   // returns width of browser viewport
             // ar = 1.333;
@@ -111,10 +133,10 @@
                 }
             jQuery(".modal").css('max-width',w);
             jQuery(".modal").css('max-height',h);
-            jQuery(".modal").css('width',parseInt(w*0.7)+'px');
-            jQuery(".modal").css('height',parseInt(h*0.7)+'px');
+            jQuery(".modal").css('width',parseInt(w*0.8)+'px');
+            jQuery(".modal").css('height',parseInt(h*0.8)+'px');
             jQuery(".modal").css('background','#000000');
-            console.log(w,h);
+            console.log(parseInt(w*0.8),parseInt(h*0.8));
             return false;
         });
         jQuery('#ss-canvas').on(jQuery.modal.BEFORE_CLOSE, function(event, modal) {
